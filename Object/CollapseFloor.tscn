@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Object/snowCenter.png" type="Texture" id=1]
+[ext_resource path="res://Object/CollapseFloor.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 35.7725, 32 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 34.3103, 21.3236 )
+
+[node name="CollapseFloor" type="KinematicBody2D"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource( 2 )
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="snowCenter" type="Sprite" parent="Sprites"]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="snowCenter2" type="Sprite" parent="Sprites"]
+position = Vector2( 0, 70 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="snowCenter3" type="Sprite" parent="Sprites"]
+position = Vector2( 0, 140 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 35.2898, 32 )
+shape = SubResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 35.2898, 0 )
+shape = SubResource( 2 )
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
